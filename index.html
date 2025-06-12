@@ -3,263 +3,1330 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>AnuragCode</title>
+    <title>Anurag Sharma - UI/UX Designer & Frontend Developer</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
     <link rel="stylesheet" href="style.css">
-    <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
+    <style>
+        :root {
+            --primary-blue: #4778F5;
+            --primary-purple: #7A3EED;
+            --gradient-primary: linear-gradient(135deg, #4778F5, #7A3EED);
+            --gradient-secondary: linear-gradient(145deg, #4778F5, #7A3EED);
+            --text-primary: #1a1a1a;
+            --text-secondary: #666;
+            --bg-light: #fafafa;
+            --bg-card: rgba(255, 255, 255, 0.9);
+            --shadow-soft: 0 8px 32px rgba(71, 120, 245, 0.1);
+            --shadow-hover: 0 16px 64px rgba(71, 120, 245, 0.2);
+            --blur-glass: blur(10px);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background: var(--bg-light);
+            color: var(--text-primary);
+            overflow-x: hidden;
+        }
+
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        /* Navigation */
+        nav {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: var(--blur-glass);
+            z-index: 1000;
+            padding: 15px 0;
+            transition: all 0.3s ease;
+        }
+
+        nav .container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-family: 'Space Grotesk', sans-serif;
+            font-size: 24px;
+            font-weight: 700;
+            background: var(--gradient-primary);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .nav-links {
+            display: flex;
+            list-style: none;
+            gap: 30px;
+        }
+
+        .nav-links a {
+            text-decoration: none;
+            color: var(--text-primary);
+            font-weight: 500;
+            transition: color 0.3s ease;
+            position: relative;
+        }
+
+        .nav-links a:hover {
+            color: var(--primary-blue);
+        }
+
+        .nav-links a::after {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: var(--gradient-primary);
+            transition: width 0.3s ease;
+        }
+
+        .nav-links a:hover::after {
+            width: 100%;
+        }
+
+        /* Hero Section */
+        .hero {
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            position: relative;
+            background: linear-gradient(135deg, #f8faff 0%, #e8f2ff 100%);
+            overflow: hidden;
+        }
+
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1000 1000"><defs><radialGradient id="a" cx="50%" cy="50%"><stop offset="0%" style="stop-color:%234778F5;stop-opacity:0.1"/><stop offset="100%" style="stop-color:%234778F5;stop-opacity:0"/></radialGradient></defs><circle cx="200" cy="200" r="100" fill="url(%23a)"/><circle cx="800" cy="300" r="150" fill="url(%23a)"/><circle cx="400" cy="700" r="120" fill="url(%23a)"/></svg>');
+            animation: float 20s ease-in-out infinite;
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translateY(0px) rotate(0deg); }
+            50% { transform: translateY(-20px) rotate(2deg); }
+        }
+
+        .hero-content {
+            position: relative;
+            z-index: 2;
+            max-width: 800px;
+        }
+
+        .hero-title {
+            font-family: 'Space Grotesk', sans-serif;
+            font-size: clamp(2.5rem, 6vw, 4rem);
+            font-weight: 700;
+            line-height: 1.2;
+            margin-bottom: 20px;
+            opacity: 0;
+            animation: slideUp 1s ease 0.2s forwards;
+        }
+
+        .hero-subtitle {
+            font-size: clamp(1.2rem, 3vw, 1.8rem);
+            font-weight: 300;
+            color: var(--text-secondary);
+            margin-bottom: 30px;
+            opacity: 0;
+            animation: slideUp 1s ease 0.4s forwards;
+        }
+
+        .hero-description {
+            font-size: 18px;
+            line-height: 1.6;
+            color: var(--text-secondary);
+            margin-bottom: 40px;
+            opacity: 0;
+            animation: slideUp 1s ease 0.6s forwards;
+        }
+
+        @keyframes slideUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .cta-buttons {
+            display: flex;
+            gap: 20px;
+            flex-wrap: wrap;
+            opacity: 0;
+            animation: slideUp 1s ease 0.8s forwards;
+        }
+
+        .btn {
+            padding: 15px 30px;
+            border-radius: 50px;
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 16px;
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+            cursor: pointer;
+            border: none;
+        }
+
+        .btn-primary {
+            background: var(--gradient-primary);
+            color: white;
+            box-shadow: var(--shadow-soft);
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: var(--shadow-hover);
+        }
+
+        .btn-secondary {
+            background: transparent;
+            color: var(--primary-purple);
+            border: 2px solid var(--primary-purple);
+        }
+
+        .btn-secondary:hover {
+            background: var(--primary-purple);
+            color: white;
+            transform: translateY(-2px);
+        }
+
+        .floating-icons {
+            position: absolute;
+            right: 10%;
+            top: 50%;
+            transform: translateY(-50%);
+            display: flex;
+            flex-direction: column;
+            gap: 30px;
+            opacity: 0;
+            animation: slideUp 1s ease 1s forwards;
+        }
+
+        .floating-icon {
+            width: 60px;
+            height: 60px;
+            background: var(--bg-card);
+            border-radius: 16px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 24px;
+            color: var(--primary-blue);
+            box-shadow: var(--shadow-soft);
+            backdrop-filter: var(--blur-glass);
+            transition: all 0.3s ease;
+            animation: bounce 2s ease-in-out infinite;
+        }
+
+        .floating-icon:nth-child(2) { animation-delay: 0.2s; }
+        .floating-icon:nth-child(3) { animation-delay: 0.4s; }
+        .floating-icon:nth-child(4) { animation-delay: 0.6s; }
+        .floating-icon:nth-child(5) { animation-delay: 0.8s; }
+
+        @keyframes bounce {
+            0%, 100% { transform: translateY(0px); }
+            50% { transform: translateY(-10px); }
+        }
+
+        .floating-icon:hover {
+            transform: translateY(-5px) scale(1.1);
+            box-shadow: var(--shadow-hover);
+        }
+
+        /* About Section */
+        .section {
+            padding: 100px 0;
+            position: relative;
+        }
+
+        .section-title {
+            font-family: 'Space Grotesk', sans-serif;
+            font-size: clamp(2rem, 4vw, 3rem);
+            font-weight: 700;
+            text-align: center;
+            margin-bottom: 60px;
+            background: var(--gradient-primary);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .about-content {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 60px;
+            align-items: center;
+        }
+
+        .about-text {
+            font-size: 18px;
+            line-height: 1.8;
+            color: var(--text-secondary);
+        }
+
+        .about-text h3 {
+            color: var(--text-primary);
+            margin-bottom: 20px;
+            font-size: 24px;
+        }
+
+        .highlight {
+            color: var(--primary-blue);
+            font-weight: 600;
+        }
+
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 30px;
+        }
+
+        .stat-card {
+            background: var(--bg-card);
+            padding: 30px;
+            border-radius: 20px;
+            text-align: center;
+            box-shadow: var(--shadow-soft);
+            backdrop-filter: var(--blur-glass);
+            transition: all 0.3s ease;
+        }
+
+        .stat-card:hover {
+            transform: translateY(-5px);
+            box-shadow: var(--shadow-hover);
+        }
+
+        .stat-number {
+            font-size: 36px;
+            font-weight: 700;
+            background: var(--gradient-primary);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .stat-label {
+            color: var(--text-secondary);
+            font-size: 14px;
+            margin-top: 5px;
+        }
+
+        /* Skills Section */
+        .skills-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+            margin-top: 40px;
+        }
+
+        .skill-category {
+            background: var(--bg-card);
+            padding: 40px;
+            border-radius: 20px;
+            box-shadow: var(--shadow-soft);
+            backdrop-filter: var(--blur-glass);
+            transition: all 0.3s ease;
+        }
+
+        .skill-category:hover {
+            transform: translateY(-5px);
+            box-shadow: var(--shadow-hover);
+        }
+
+        .skill-category h3 {
+            font-size: 20px;
+            margin-bottom: 20px;
+            color: var(--primary-blue);
+        }
+
+        .skill-tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+        }
+
+        .skill-tag {
+            background: linear-gradient(135deg, var(--primary-blue), var(--primary-purple));
+            color: white;
+            padding: 8px 16px;
+            border-radius: 20px;
+            font-size: 14px;
+            font-weight: 500;
+            transition: all 0.3s ease;
+        }
+
+        .skill-tag:hover {
+            transform: scale(1.05);
+            box-shadow: 0 4px 12px rgba(71, 120, 245, 0.3);
+        }
+
+        /* Experience Section */
+        .experience-timeline {
+            position: relative;
+            margin-top: 40px;
+        }
+
+        .timeline-item {
+            display: flex;
+            margin-bottom: 50px;
+            position: relative;
+        }
+
+        .timeline-item::before {
+            content: '';
+            position: absolute;
+            left: 30px;
+            top: 60px;
+            bottom: -30px;
+            width: 2px;
+            background: linear-gradient(to bottom, var(--primary-blue), var(--primary-purple));
+        }
+
+        .timeline-item:last-child::before {
+            display: none;
+        }
+
+        .timeline-dot {
+            width: 60px;
+            height: 60px;
+            background: var(--gradient-primary);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 20px;
+            margin-right: 30px;
+            flex-shrink: 0;
+            z-index: 2;
+            position: relative;
+        }
+
+        .timeline-content {
+            background: var(--bg-card);
+            padding: 30px;
+            border-radius: 20px;
+            box-shadow: var(--shadow-soft);
+            backdrop-filter: var(--blur-glass);
+            flex: 1;
+            transition: all 0.3s ease;
+        }
+
+        .timeline-content:hover {
+            transform: translateX(10px);
+            box-shadow: var(--shadow-hover);
+        }
+
+        .timeline-content h3 {
+            color: var(--primary-blue);
+            margin-bottom: 10px;
+        }
+
+        .timeline-content .company {
+            font-weight: 600;
+            color: var(--text-primary);
+            margin-bottom: 15px;
+        }
+
+        /* Projects Section */
+        .projects-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 30px;
+            margin-top: 40px;
+        }
+
+        .project-card {
+            background: var(--bg-card);
+            border-radius: 20px;
+            overflow: hidden;
+            box-shadow: var(--shadow-soft);
+            backdrop-filter: var(--blur-glass);
+            transition: all 0.3s ease;
+            position: relative;
+        }
+
+        .project-card:hover {
+            transform: translateY(-10px);
+            box-shadow: var(--shadow-hover);
+        }
+
+        .project-image {
+            height: 200px;
+            background: var(--gradient-primary);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 48px;
+        }
+
+        .project-content {
+            padding: 30px;
+        }
+
+        .project-title {
+            font-size: 20px;
+            font-weight: 600;
+            margin-bottom: 10px;
+            color: var(--text-primary);
+        }
+
+        .project-description {
+            color: var(--text-secondary);
+            line-height: 1.6;
+            margin-bottom: 20px;
+        }
+
+        .project-metrics {
+            display: flex;
+            gap: 15px;
+            margin-bottom: 20px;
+        }
+
+        .metric {
+            background: rgba(71, 120, 245, 0.1);
+            padding: 5px 12px;
+            border-radius: 15px;
+            font-size: 12px;
+            font-weight: 600;
+            color: var(--primary-blue);
+        }
+
+        /* Contact Section */
+        .contact {
+            background: linear-gradient(135deg, var(--primary-blue), var(--primary-purple));
+            color: white;
+        }
+
+        .contact .section-title {
+            color: white;
+            -webkit-text-fill-color: white;
+        }
+
+        .contact-content {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 60px;
+            align-items: start;
+        }
+
+        .contact-form {
+            background: rgba(255, 255, 255, 0.1);
+            padding: 40px;
+            border-radius: 20px;
+            backdrop-filter: var(--blur-glass);
+        }
+
+        .form-group {
+            margin-bottom: 25px;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: 500;
+        }
+
+        .form-group input,
+        .form-group textarea {
+            width: 100%;
+            padding: 15px;
+            border: none;
+            border-radius: 10px;
+            background: rgba(255, 255, 255, 0.9);
+            color: var(--text-primary);
+            font-size: 16px;
+            transition: all 0.3s ease;
+        }
+
+        .form-group input:focus,
+        .form-group textarea:focus {
+            outline: none;
+            background: white;
+            box-shadow: 0 0 20px rgba(255, 255, 255, 0.3);
+        }
+
+        .contact-info h3 {
+            font-size: 24px;
+            margin-bottom: 20px;
+        }
+
+        .contact-info p {
+            font-size: 18px;
+            line-height: 1.6;
+            margin-bottom: 30px;
+            opacity: 0.9;
+        }
+
+        .social-links {
+            display: flex;
+            gap: 20px;
+        }
+
+        .social-link {
+            width: 50px;
+            height: 50px;
+            background: rgba(255, 255, 255, 0.2);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 20px;
+            text-decoration: none;
+            transition: all 0.3s ease;
+        }
+
+        .social-link:hover {
+            background: rgba(255, 255, 255, 0.3);
+            transform: translateY(-3px);
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .nav-links {
+                display: none;
+            }
+
+            .about-content,
+            .contact-content {
+                grid-template-columns: 1fr;
+                gap: 40px;
+            }
+
+            .floating-icons {
+                display: none;
+            }
+
+            .cta-buttons {
+                justify-content: center;
+            }
+
+            .timeline-item {
+                flex-direction: column;
+                align-items: center;
+                text-align: center;
+            }
+
+            .timeline-item::before {
+                display: none;
+            }
+
+            .timeline-dot {
+                margin-right: 0;
+                margin-bottom: 20px;
+            }
+
+            .timeline-content:hover {
+                transform: translateY(-5px);
+            }
+        }
+
+        /* Scroll Animations */
+        .scroll-reveal {
+            opacity: 0;
+            transform: translateY(50px);
+            transition: all 0.8s ease;
+        }
+
+        .scroll-reveal.revealed {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* Loading Animation */
+        .loading {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: var(--gradient-primary);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            z-index: 9999;
+            transition: opacity 0.5s ease;
+        }
+
+        .loading.hidden {
+            opacity: 0;
+            pointer-events: none;
+        }
+
+        .loader {
+            width: 50px;
+            height: 50px;
+            border: 3px solid rgba(255, 255, 255, 0.3);
+            border-top: 3px solid white;
+            border-radius: 50%;
+            animation: spin 1s linear infinite;
+        }
+
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+    </style>
 </head>
 <body>
-<div class="container"> 
-        <video class="back-vid" loop autoplay muted plays-inline src="videos/galaxy.mp4" ></video>
-
-    <header>
-        <div class="left">
-            <img src="images/9.webp" alt="logo">
-            <h1><span style="color:#1E90FF;">Anurag</span><span style="color:#FF69B4;">Verse</span></h1>
-        </div>
-
-        <ul>
-            <li><a href="#">About</a></li>
-            <li><a href="#">Skills</a></li>
-            <li><a href="#">Projects</a></li>
-        </ul>
-
-        <div class="box-icons">
-            <a href="https://mail.google.com/mail/u/0/#inbox"><i class='bx bxl-gmail'></i></a>
-            <a href="https://github.com/AnuragSharma-11"><i class='bx bxl-github'></i></a>
-            <a href="https://www.linkedin.com/in/anurag-sharma-42a080307/"><i class='bx bxl-linkedin-square'></i></a>
-        </div>
-
-        <div class="menu-icon"><i class='bx bx-menu'></i></div>
-    </header>
-
-    <div class="sidebar">
-        <div class="close-icon ">
-            <i class='bx bx-x'></i>
-        </div>
-
-        <ul>
-            <li><a href="#">Home</a></li>
-            <li><a href="#">About</a></li>
-            <li><a href="#">Skills</a></li>
-            <li><a href="#">Project</a></li>
-        </ul>
-
-        <div class="social-icons">
-            <a href="#"><i class='bx bxl-youtube'></i></a>
-            <a href="#"><i class='bx bxl-github'></i></a>
-            <a href="#"><i class='bx bxl-linkedin-square'></i></a>
-        </div>
+    <!-- Loading Screen -->
+    <div class="loading" id="loading">
+        <div class="loader"></div>
     </div>
 
-    <div class="blackhole-box">
-        <video loop autoplay muted plays-inline src="videos/blackhole.mp4" type="videos/mp4"></video>
-    </div>
-
-    <section class="hero">
-        <div class="hero-info autoBlur">
-            <div class="hero-info-title">
-                <i class='bx bxl-sketch'></i>
-                front-end Developer Portfolio
-            </div>
-
-            <h1>Providing <span class="gradient ">the best</span>
-             Project <span class="gradient ">Experience</span></h1>
-
-            <p>I'm a Front-end deveoper with Experience in website,
-                Mobile and Software deveopement.
-                Check out my and skills.</p>
-            
-            <button><i class='bx bx-send' ></i>Contect Me</button>
+    <!-- Navigation -->
+    <nav>
+        <div class="container">
+            <div class="logo">Anurag Sharma</div>
+            <ul class="nav-links">
+                <li><a href="#home">Home</a></li>
+                <li><a href="#about">About</a></li>
+                <li><a href="#skills">Skills</a></li>
+                <li><a href="#experience">Experience</a></li>
+                <li><a href="#projects">Projects</a></li>
+                <li><a href="#contact">Contact</a></li>
+            </ul>
         </div>
+    </nav>
 
-        <div class="hero-vid-box">
-            <video class="autoBlur" autoplay loop muted  plays-inline src="videos/hero-video.mp4" type="videos/mp4" ></video>
-        </div>
-
-        <!-- This is for the Scroll animated bar -->
-        <div class="scroll-down"></div>
-    </section>
-
-    <section class="info-section">
-        <h1 class="section-title autoDisplay">Hello, There👋</h1>
-        <div class="info-cards">
-            <div class="card">
-                <h1>Hi there, I'm Anurag Sharma</h1>
-                <p>With 1 years of experience, I have honed my skills in 
-                    frontend dev, creating dynamic and responsive websites.</p>
-                
-                    <img src="images/grid1.png" alt="card-1">
+    <!-- Hero Section -->
+    <section class="hero" id="home">
+        <div class="container">
+            <div class="hero-content">
+                <h1 class="hero-title">Hello, I'm <span style="background: linear-gradient(135deg, #4778F5, #7A3EED); -webkit-background-clip: text; -webkit-text-fill-color: transparent;">Anurag</span></h1>
+                <p class="hero-subtitle">UI/UX Designer and Frontend Developer .</p>
+                <p class="hero-description">
+                    Blending design intuition with smart code and creative AI to build digital experiences that don't just look good — but perform beautifully.
+                </p>
+                <div class="cta-buttons">
+                    <a href="#projects" class="btn btn-primary">Explore My Work</a>
+                    <a href="#contact" class="btn btn-secondary">Download Resume</a>
+                </div>
             </div>
-
-            <div class="card">
-                <h1>Tech Stack</h1>
-                <p>I specialize in a variety of languages, frameworks,
-                    and tools that enable me to build robust and scalable applications.</p>
-                
-                <img src="images/grid2.png" alt="card-1">
-            </div>
-
-            <div class="card">
-                <h1>I'm very flexible with time zone communications & locations</h1>
-                <p>I'm based in Jaipur, Rajasthan and open to remote work or relocate worlwide.</p>
-                
-                    <video autoplay muted loop plays-inline src="videos/glob.mp4" type="videos/mp4"></video>
-                    <button><i class='bx bx-link-external'></i>Contact Me</button>
-            </div>
-
-            <div class="card">
-                <h1>My Passion for coding</h1>
-                <p>I love solving problems and building things through code.
-                    Programming isn't just my profession-it's my passion. 
-                    I enjoy exploring new technologies, and enhancing my skills. </p>
-                
-                <img src="images/grid4.png" alt="card-1">
+            <div class="floating-icons">
+                <div class="floating-icon"><i class="fab fa-figma"></i></div>
+                <div class="floating-icon"><i class="fas fa-robot"></i></div>
+                <div class="floating-icon"><i class="fab fa-html5"></i></div>
+                <div class="floating-icon"><i class="fab fa-js-square"></i></div>
+                <div class="floating-icon"><i class="fas fa-magic"></i></div>
             </div>
         </div>
     </section>
 
-    <section class="my-projects">
-        <h1 class="section-title autoDisplay">My Projects 🧑‍💻</h1>
-        <div class="project-card">
-            <div class="project-vidbox autoBlur">
-                <video id="projectVideo-1" src="videos/project1.mp4" ></video>
-                <div class="hover-sign"></div>
-            </div>
-
-            <div class="project-info fadeInRight">
-                <h1>Animated <span class="gradient">Gaming</span> Website</h1>
-
-                <p>Designed and developed an interactive a responsive layout, while integrating stunning 
-                text gradients, hover effects, and neon aesthetics for that perfect dark theme.
-                A modern web design that captivates with scroll animations, parallax effects, and smooth
-                scrolling.</p>
-
-                <button><i class='bx bx-link-external'></i>Website</button>
-            </div>
-        </div>
-
-        <div class="project-card">
-            <div class="project-vidbox autoBlur">
-                <video id="projectVideo-2" src="videos/project2.mp4" ></video>
-            </div>
-
-            <div class="project-info fadeInRight">
-                <h1>Modern <span class="gradient">Portfolio</span> Website</h1>
-
-                <p>Designed and developed an interactive a responsive layout, while integrating stunning 
-                text gradients, hover effects, Optimized animation keyframes, and added interactive elements,
-                and implemented CSS transitions for a seamless user experience (UX) and neon aesthetics for 
-                that perfect dark theme.
-                </p>
-
-                <button><i class='bx bx-link-external'></i>Website</button>
-            </div>
-        </div>
-
-        <div class="project-card">
-            <div class="project-vidbox autoBlur">
-                <video id="projectVideo-3" src="videos/project3.mp4" ></video>
-            </div>
-
-            <div class="project-info fadeInRight">
-                <h1>Movie <span class="gradient">Landing</span> Website</h1>
-
-                <p>Designed and developed an interactive a responsive layout, Optimized animation keyframes,
-                and added interactive elements, and implemented CSS transitions for a seamless user experience
-                (UX) and neon aesthetics for that perfect dark theme. while integrating stunning text gradients,
-                hover effects, and neon aesthetics for that perfect dark theme.
-                </p>
-
-                <button><i class='bx bx-link-external'></i>Website</button>
-            </div>
-        </div>
-    </section>
-
-    <section class="skills-section">
-        <h1 class="section-title autoDisplay">
-            My Skills 💪
-        </h1>
-
-        <div class="skills-box">
-            <img class="skills-image" src="images/digital brain.png" alt="skills-image">
-            
-            <div class="designer autoDisplay">
-                <h1 class="gradient">Designer <i class='bx bx-laptop'></i></h1>
-                <p>I have expertise in HTML, CSS, JavaScript, jQuery and 
-                    design tools like Figma. My strength lies in blending 
-                    aesthetics With fuctionally to create seamless user experience.
-                </p>
-            </div>
-
-            <div class="coder autoDisplay">
-                <h1 class="gradient">
-                    Coder <i class='bx bx-code-block'></i>
-                </h1>
-                <p>I'm skilled in HTML, CSS, JavaScript, and frameworks like React and Bootstrap.
-                    I also have Experience in designing tools like Figma.
-                </p>
-            </div>
-
-            <div class="slider" reverse="true" style="
-                --width: 100px;    
-                --height: 100px;
-                --quantity: 9;">
-                <div class="list">
-                    <div class="item" style="--position:1"><img src="images/1.png" alt="slider-image"></div>
-                    <div class="item" style="--position:2"><img src="images/2.png" alt="slider-image"></div>
-                    <div class="item" style="--position:3"><img src="images/3.png" alt="slider-image"></div>
-                    <div class="item" style="--position:4"><img src="images/4.png" alt="slider-image"></div>
-                    <div class="item" style="--position:5"><img src="images/5.png" alt="slider-image"></div>
-                    <div class="item" style="--position:6"><img src="images/6.png" alt="slider-image"></div>
-                    <div class="item" style="--position:7"><img src="images/7.png" alt="slider-image"></div>
-                    <div class="item" style="--position:8"><img src="images/8.png" alt="slider-image"></div>
-                    <div class="item" style="--position:9"><img src="images/9.webp" alt="slider-image"></div>
+    <!-- About Section -->
+    <section class="section" id="about">
+        <div class="container">
+            <h2 class="section-title scroll-reveal">Who I Am</h2>
+            <div class="about-content scroll-reveal">
+                <div class="about-text">
+                    <h3>Design-First Developer</h3>
+                    <p>
+                        I bridge the gap between beautiful design and functional code. With a <span class="highlight">25% increase in engagement</span> through UI + AI synergy, I create digital solutions that resonate with users and drive business results.
+                    </p>
+                    <p>
+                        My approach combines user-centered design principles with cutting-edge development techniques and AI-powered automation to deliver experiences that are both visually stunning and technically robust.
+                    </p>
+                    <p style="font-style: italic; color: var(--primary-blue); font-weight: 600; margin-top: 20px;">
+                        "Designs that don't just look good — but perform beautifully."
+                    </p>
+                </div>
+                <div class="stats-grid">
+                    <div class="stat-card">
+                        <div class="stat-number">50+</div>
+                        <div class="stat-label">Projects Completed</div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-number">25%</div>
+                        <div class="stat-label">Avg. Engagement Boost</div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-number">100%</div>
+                        <div class="stat-label">Client Satisfaction</div>
+                    </div>
                 </div>
             </div>
         </div>
     </section>
 
-    <section class="contact-section">
-        <h1 class="section-title autoDisplay">Let's talk😊</h1>
-
-        <div class="social-box autoBlur">
-            <a href="#"><i class='bx bx-phone-call'></i> +91 7062002277</a>
-            <a href="www.linkedin.com/in/anurag-sharma-42a080307"><i class='bx bxl-linkedin-square'></i> www.linkedin.com</a>
-            <a href="#"><i class='bx bxl-gmail' ></i> anuragsharma.bharat11@gmail.com</a>
-            
-            <div class="social-icons">
-                <a href="#"><i class='bx bxl-youtube' ></i></a>
-                <a href="#"><i class='bx bxl-twitter' ></i></a>
-                <a href="#"><i class='bx bxl-gmail' ></i></a>
+    <!-- Skills Section -->
+    <section class="section" id="skills">
+        <div class="container">
+            <h2 class="section-title scroll-reveal">My Creative Arsenal</h2>
+            <div class="skills-grid scroll-reveal">
+                <div class="skill-category">
+                    <h3><i class="fas fa-code"></i> Core Development</h3>
+                    <div class="skill-tags">
+                        <span class="skill-tag">HTML5</span>
+                        <span class="skill-tag">CSS3</span>
+                        <span class="skill-tag">JavaScript</span>
+                        <span class="skill-tag">Responsive Design</span>
+                    </div>
+                </div>
+                <div class="skill-category">
+                    <h3><i class="fas fa-palette"></i> UI/UX Tools</h3>
+                    <div class="skill-tags">
+                        <span class="skill-tag">Figma</span>
+                        <span class="skill-tag">Adobe XD</span>
+                        <span class="skill-tag">Canva</span>
+                        <span class="skill-tag">Prototyping</span>
+                        <span class="skill-tag">Wireframing</span>
+                        <span class="skill-tag">Design Systems</span>
+                    </div>
+                </div>
+                <div class="skill-category">
+                    <h3><i class="fas fa-robot"></i> AI & Automation</h3>
+                    <div class="skill-tags">
+                        <span class="skill-tag">ChatGPT</span>
+                        <span class="skill-tag">MidJourney</span>
+                        <span class="skill-tag">ElevenLabs</span>
+                        <span class="skill-tag">Prompt Engineering</span>
+                        <span class="skill-tag">AI Workflows</span>
+                        <span class="skill-tag">Automation</span>
+                    </div>
+                </div>
+                <div class="skill-category">
+                    <h3><i class="fas fa-video"></i> Content Creation</h3>
+                    <div class="skill-tags">
+                        <span class="skill-tag">Storyboarding</span>
+                        <span class="skill-tag">Scripting</span>
+                        <span class="skill-tag">Video Editing</span>
+                        <span class="skill-tag">Motion Graphics</span>
+                        <span class="skill-tag">Brand Design</span>
+                    </div>
+                </div>
+                <div class="skill-category">
+                    <h3><i class="fas fa-lightbulb"></i> Soft Skills</h3>
+                    <div class="skill-tags">
+                        <span class="skill-tag">Creativity</span>
+                        <span class="skill-tag">Problem-Solving</span>
+                        <span class="skill-tag">Communication</span>
+                        <span class="skill-tag">Team Leadership</span>
+                        <span class="skill-tag">Project Management</span>
+                    </div>
+                </div>
+                <div class="skill-category">
+                    <h3><i class="fas fa-tools"></i> Tech Stack</h3>
+                    <div class="skill-tags">
+                        <span class="skill-tag">VS Code</span>
+                        <span class="skill-tag">GitHub</span>
+                        <span class="skill-tag">Webflow</span>
+                        <span class="skill-tag">Framer</span>
+                        <span class="skill-tag">WordPress</span>
+                        <span class="skill-tag">Node.js</span>
+                    </div>
+                </div>
             </div>
-        
-        </div>
-
-        
-
-        <div class="contact-box autoBlur">
-            <p>Wheter you're looking to build a new website, improve your existing 
-            platform, or bring a unique project to file. i'm here to help.</p>
-        
-            <p>Full Name</p>
-            <input type="text" placeholder="Your Full Name">
-
-            <p>Email Address</p>
-            <input type="text" placeholder="Your Email">
-
-            <p>Your Message</p>
-            <input class="input-message" type="text" placeholder="Share your thoughts...">
-
-            <button><i class='bx bx-send' ></i>Send Message</button>
-            <a href="asset/Anurag Sharma Resume..pdf" download="Anurag Sharma Resume.pdf"
-            class="download-btn">Download Resume</a>
         </div>
     </section>
 
-    <footer>
-        <h3>Copyright © Anurag, Made with ❤️ by AnuragVerse</h3>
+    <!-- Experience Section -->
+    <section class="section" id="experience">
+        <div class="container">
+            <h2 class="section-title scroll-reveal">Where I Built Things</h2>
+            <div class="experience-timeline scroll-reveal">
+                <div class="timeline-item">
+                    <div class="timeline-dot">
+                        <i class="fas fa-briefcase"></i>
+                    </div>
+                    <div class="timeline-content">
+                        <h3>Frontend + UI/UX Designer</h3>
+                        <div class="company">Brosis Technologies</div>
+                        <p>Built comprehensive dashboards, educational platforms, and CRM interfaces. Led the design system implementation that improved development efficiency by 40% and user satisfaction scores by 35%.</p>
+                        <div class="project-metrics">
+                            <span class="metric">Landing Pages</span>
+                            <span class="metric">Responsive Sites</span>
+                            <span class="metric">Performance Optimization</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="timeline-item">
+                    <div class="timeline-dot">
+                        <i class="fas fa-mobile-alt"></i>
+                    </div>
+                    <div class="timeline-content">
+                        <h3>Web Developer</h3>
+                        <div class="company">Unified Mentor Pvt. Ltd.</div>
+                        <p>Designed mobile app UIs in Figma and implemented responsive web solutions. Achieved 30% increase in user engagement through intuitive interface design and seamless user experience optimization.</p>
+                        <div class="project-metrics">
+                            <span class="metric">Mobile UI Design</span>
+                            <span class="metric">+30% Engagement</span>
+                            <span class="metric">UX Optimization</span>
+                        </div>
+                    </div>
+                </div>
+                
+                 <div class="timeline-item">
+                    <div class="timeline-dot">
+                        <i class="fas fa-laptop-code"></i>
+                    </div>
+                    <div class="timeline-content">
+                        <h3>Web Developer</h3>
+                        <div class="company">Codsoft Pvt. Ltd.</div>
+                        <p>Developed responsive landing pages and corporate websites with focus on performance optimization. Achieved 95+ PageSpeed scores and implemented modern web technologies for enhanced user experiences.</p>
+                        <div class="project-metrics">
+                            <span class="metric">Mobile UI Design</span>
+                            <span class="metric">+30% Engagement</span>
+                            <span class="metric">UX Optimization</span>
+                        </div>
+                    </div>
+                </div> 
+
+            </div>
+        </div>
+    </section>
+
+    <!-- Projects Section -->
+    <section class="section" id="projects">
+        <div class="container">
+            <h2 class="section-title scroll-reveal">Real-World Impact</h2>
+            <div class="projects-grid scroll-reveal">
+                <div class="project-card">
+                    <div class="project-image">
+                        <i class="fas fa-server"></i>
+                    </div>
+                    <div class="project-content">
+                        <h3 class="project-title">IT Service Websites</h3>
+                        <p class="project-description">
+                            Designed and developed comprehensive IT service platforms with modern interfaces and intuitive navigation structures.
+                        </p>
+                        <div class="project-metrics">
+                            <span class="metric">+45% User Retention</span>
+                            <span class="metric">Modern UI</span>
+                            <span class="metric">Responsive</span>
+                        </div>
+                        <a href="#" class="btn btn-primary" style="display: inline-block; margin-top: 15px; padding: 10px 20px; font-size: 14px;">View Project</a>
+                    </div>
+                </div>
+                <div class="project-card">
+                    <div class="project-image">
+                        <i class="fas fa-users"></i>
+                    </div>
+                    <div class="project-content">
+                        <h3 class="project-title">CRM Dashboard UI</h3>
+                        <p class="project-description">
+                            Created an intuitive CRM interface that streamlined user workflows and reduced onboarding time significantly.
+                        </p>
+                        <div class="project-metrics">
+                            <span class="metric">-38% Onboarding Time</span>
+                            <span class="metric">Dashboard</span>
+                            <span class="metric">UX Focus</span>
+                        </div>
+                        <a href="#" class="btn btn-primary" style="display: inline-block; margin-top: 15px; padding: 10px 20px; font-size: 14px;">View Project</a>
+                    </div>
+                </div>
+                <div class="project-card">
+                    <div class="project-image">
+                        <i class="fas fa-shopping-cart"></i>
+                    </div>
+                    <div class="project-content">
+                        <h3 class="project-title">E-Commerce Platform</h3>
+                        <p class="project-description">
+                            Developed a modern e-commerce interface with focus on conversion optimization and user experience enhancement.
+                        </p>
+                        <div class="project-metrics">
+                            <span class="metric">-25% Bounce Rate</span>
+                            <span class="metric">E-Commerce</span>
+                            <span class="metric">Conversion Focus</span>
+                        </div>
+                        <a href="#" class="btn btn-primary" style="display: inline-block; margin-top: 15px; padding: 10px 20px; font-size: 14px;">View Project</a>
+                    </div>
+                </div>
+                <div class="project-card">
+                    <div class="project-image">
+                        <i class="fas fa-gamepad"></i>
+                    </div>
+                    <div class="project-content">
+                        <h3 class="project-title">Gaming Website</h3>
+                        <p class="project-description">
+                            Built an interactive gaming platform with enhanced performance metrics and improved accessibility standards.
+                        </p>
+                        <div class="project-metrics">
+                            <span class="metric">+40% Performance</span>
+                            <span class="metric">Gaming UI</span>
+                            <span class="metric">Accessibility</span>
+                        </div>
+                        <a href="#" class="btn btn-primary" style="display: inline-block; margin-top: 15px; padding: 10px 20px; font-size: 14px;">View Project</a>
+                    </div>
+                </div>
+                <div class="project-card">
+                    <div class="project-image">
+                        <i class="fas fa-robot"></i>
+                    </div>
+                    <div class="project-content">
+                        <h3 class="project-title">AI Prompt Engineering</h3>
+                        <p class="project-description">
+                            Developed AI-powered automation workflows and prompt engineering solutions for enhanced productivity.
+                        </p>
+                        <div class="project-metrics">
+                            <span class="metric">AI Automation</span>
+                            <span class="metric">Productivity</span>
+                            <span class="metric">Innovation</span>
+                        </div>
+                        <a href="#" class="btn btn-primary" style="display: inline-block; margin-top: 15px; padding: 10px 20px; font-size: 14px;">View Project</a>
+                    </div>
+                </div>
+                <div class="project-card">
+                    <div class="project-image">
+                        <i class="fas fa-graduation-cap"></i>
+                    </div>
+                    <div class="project-content">
+                        <h3 class="project-title">Educational Platforms</h3>
+                        <p class="project-description">
+                            Designed user-friendly educational interfaces that improved learning outcomes and student engagement.
+                        </p>
+                        <div class="project-metrics">
+                            <span class="metric">Education</span>
+                            <span class="metric">User-Friendly</span>
+                            <span class="metric">Engagement</span>
+                        </div>
+                        <a href="#" class="btn btn-primary" style="display: inline-block; margin-top: 15px; padding: 10px 20px; font-size: 14px;">View Project</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- AI Playground Section -->
+    <section class="section" style="background: linear-gradient(135deg, #f8faff 0%, #e8f2ff 100%);">
+        <div class="container">
+            <h2 class="section-title scroll-reveal">AI Playground</h2>
+            <div class="scroll-reveal" style="text-align: center; margin-bottom: 50px;">
+                <p style="font-size: 18px; color: var(--text-secondary); font-style: italic;">
+                    "AI is not the future. It's my co-pilot today."
+                </p>
+            </div>
+            <div class="skills-grid scroll-reveal">
+                <div class="skill-category">
+                    <h3><i class="fas fa-pen-fancy"></i> Copywriting Prompts</h3>
+                    <p style="color: var(--text-secondary); margin-bottom: 20px; font-size: 14px;">
+                        Crafting compelling copy that converts visitors into customers through strategic prompt engineering.
+                    </p>
+                    <div class="skill-tags">
+                        <span class="skill-tag">Headlines</span>
+                        <span class="skill-tag">CTAs</span>
+                        <span class="skill-tag">Product Descriptions</span>
+                        <span class="skill-tag">Email Copy</span>
+                    </div>
+                </div>
+                <div class="skill-category">
+                    <h3><i class="fas fa-magic"></i> Design Prompts</h3>
+                    <p style="color: var(--text-secondary); margin-bottom: 20px; font-size: 14px;">
+                        Generating stunning visuals and design concepts through advanced AI prompt techniques.
+                    </p>
+                    <div class="skill-tags">
+                        <span class="skill-tag">MidJourney</span>
+                        <span class="skill-tag">DALL-E</span>
+                        <span class="skill-tag">Style Transfer</span>
+                        <span class="skill-tag">Concept Art</span>
+                    </div>
+                </div>
+                <div class="skill-category">
+                    <h3><i class="fas fa-cogs"></i> Automation Workflows</h3>
+                    <p style="color: var(--text-secondary); margin-bottom: 20px; font-size: 14px;">
+                        Building intelligent automation systems that streamline workflows and boost productivity.
+                    </p>
+                    <div class="skill-tags">
+                        <span class="skill-tag">ChatGPT API</span>
+                        <span class="skill-tag">Zapier</span>
+                        <span class="skill-tag">Content Generation</span>
+                        <span class="skill-tag">Data Processing</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Certifications Section -->
+    <section class="section">
+        <div class="container">
+            <h2 class="section-title scroll-reveal">Certifications & Education</h2>
+            <div class="skills-grid scroll-reveal">
+                <div class="skill-category" style="text-align: center;">
+                    <div style="width: 80px; height: 80px; background: var(--gradient-primary); border-radius: 50%; display: flex; align-items: center; justify-content: center; color: white; font-size: 24px; margin: 0 auto 20px;">
+                        <i class="fas fa-university"></i>
+                    </div>
+                    <h3>IIT Guwahati</h3>
+                    <p style="color: var(--text-secondary); margin-bottom: 15px;">Data Science Program</p>
+                    <span class="skill-tag">Ongoing - 2025</span>
+                </div>
+                <div class="skill-category" style="text-align: center;">
+                    <div style="width: 80px; height: 80px; background: var(--gradient-primary); border-radius: 50%; display: flex; align-items: center; justify-content: center; color: white; font-size: 24px; margin: 0 auto 20px;">
+                        <i class="fas fa-code"></i>
+                    </div>
+                    <h3>Samyak Institute</h3>
+                    <p style="color: var(--text-secondary); margin-bottom: 15px;">Web Design Certification</p>
+                    <span class="skill-tag">2025</span>
+                </div>
+                <div class="skill-category" style="text-align: center;">
+                    <div style="width: 80px; height: 80px; background: var(--gradient-primary); border-radius: 50%; display: flex; align-items: center; justify-content: center; color: white; font-size: 24px; margin: 0 auto 20px;">
+                        <i class="fas fa-robot"></i>
+                    </div>
+                    <h3>B10x Academy</h3>
+                    <p style="color: var(--text-secondary); margin-bottom: 15px;">AI Tools Expert</p>
+                    <span class="skill-tag">2024</span>
+                </div>
+            </div>
+            <div style="text-align: center; margin-top: 40px;" class="scroll-reveal">
+                <a href="#contact" class="btn btn-primary" style="display: inline-flex; align-items: center; gap: 10px;">
+                    <i class="fas fa-download"></i>
+                    Download Resume
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section class="section contact" id="contact">
+        <div class="container">
+            <h2 class="section-title scroll-reveal">Let's Build Something Bold</h2>
+            <div class="contact-content scroll-reveal">
+                <div class="contact-info">
+                    <h3>Ready to Create Magic?</h3>
+                    <p>
+                        Whether you need a stunning website, an intuitive app interface, or AI-powered solutions, I'm here to bring your vision to life. Let's make your next big idea real — together.
+                    </p>
+                    <div class="social-links">
+                        <a href="#" class="social-link"><i class="fab fa-linkedin"></i></a>
+                        <a href="#" class="social-link"><i class="fab fa-github"></i></a>
+                        <a href="#" class="social-link"><i class="fab fa-twitter"></i></a>
+                        <a href="#" class="social-link"><i class="fab fa-dribbble"></i></a>
+                        <a href="#" class="social-link"><i class="fab fa-behance"></i></a>
+                    </div>
+                </div>
+                <form class="contact-form" id="contactForm">
+                    <div class="form-group">
+                        <label for="name">Your Name</label>
+                        <input type="text" id="name" name="name" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="email">Email Address</label>
+                        <input type="email" id="email" name="email" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="message">Project Details</label>
+                        <textarea id="message" name="message" rows="5" placeholder="Tell me about your project..." required></textarea>
+                    </div>
+                    <button type="submit" class="btn btn-primary" style="width: 100%; display: flex; align-items: center; justify-content: center; gap: 10px;">
+                        <i class="fas fa-paper-plane"></i>
+                        Send Message
+                    </button>
+                </form>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer style="background: var(--text-primary); color: white; text-align: center; padding: 30px 0;">
+        <div class="container">
+            <p>&copy; 2025 Anurag Sharma. Designed with ❤️ and built with modern web technologies.</p>
+        </div>
     </footer>
-</div>
-    <script src="script.js"></script>
+
+    <script>
+        // Loading Animation
+        window.addEventListener('load', function() {
+            setTimeout(() => {
+                document.getElementById('loading').classList.add('hidden');
+            }, 1000);
+        });
+
+        // Smooth Scrolling
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                }
+            });
+        });
+
+        // Scroll Reveal Animation
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -50px 0px'
+        };
+
+        const observer = new IntersectionObserver(function(entries) {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('revealed');
+                }
+            });
+        }, observerOptions);
+
+        document.querySelectorAll('.scroll-reveal').forEach(el => {
+            observer.observe(el);
+        });
+
+        // Navbar Scroll Effect
+        let lastScrollTop = 0;
+        window.addEventListener('scroll', function() {
+            const nav = document.querySelector('nav');
+            const scrollTop = window.pageYOffset || document.documentElement.scrollTop;
+            
+            if (scrollTop > 100) {
+                nav.style.background = 'rgba(255, 255, 255, 0.95)';
+                nav.style.backdropFilter = 'blur(10px)';
+                nav.style.boxShadow = '0 2px 20px rgba(0,0,0,0.1)';
+            } else {
+                nav.style.background = 'rgba(255, 255, 255, 0.95)';
+                nav.style.boxShadow = 'none';
+            }
+        });
+
+        // Contact Form Submission
+        document.getElementById('contactForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            // Get form data
+            const formData = new FormData(this);
+            const data = Object.fromEntries(formData);
+            
+            // Simulate form submission
+            const submitBtn = this.querySelector('button[type="submit"]');
+            const originalText = submitBtn.innerHTML;
+            
+            submitBtn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Sending...';
+            submitBtn.disabled = true;
+            
+            setTimeout(() => {
+                submitBtn.innerHTML = '<i class="fas fa-check"></i> Message Sent!';
+                submitBtn.style.background = '#22c55e';
+                
+                setTimeout(() => {
+                    submitBtn.innerHTML = originalText;
+                    submitBtn.style.background = '';
+                    submitBtn.disabled = false;
+                    this.reset();
+                }, 2000);
+            }, 1500);
+        });
+
+        // Parallax Effect for Hero Section
+        window.addEventListener('scroll', function() {
+            const scrolled = window.pageYOffset;
+            const hero = document.querySelector('.hero');
+            const heroContent = document.querySelector('.hero-content');
+            
+            if (hero && scrolled < hero.offsetHeight) {
+                heroContent.style.transform = `translateY(${scrolled * 0.5}px)`;
+            }
+        });
+
+        // Add hover effects to project cards
+        document.querySelectorAll('.project-card').forEach(card => {
+            card.addEventListener('mouseenter', function() {
+                this.style.transform = 'translateY(-10px) scale(1.02)';
+            });
+            
+            card.addEventListener('mouseleave', function() {
+                this.style.transform = 'translateY(-10px) scale(1)';
+            });
+        });
+
+        // Add magnetic effect to buttons
+        document.querySelectorAll('.btn').forEach(btn => {
+            btn.addEventListener('mouseenter', function() {
+                this.style.transform = 'translateY(-2px) scale(1.05)';
+            });
+            
+            btn.addEventListener('mouseleave', function() {
+                this.style.transform = 'translateY(0) scale(1)';
+            });
+        });
+
+        // Add click ripple effect
+        document.querySelectorAll('.btn').forEach(btn => {
+            btn.addEventListener('click', function(e) {
+                const ripple = document.createElement('span');
+                const rect = this.getBoundingClientRect();
+                const size = Math.max(rect.width, rect.height);
+                const x = e.clientX - rect.left - size / 2;
+                const y = e.clientY - rect.top - size / 2;
+                
+                ripple.style.width = ripple.style.height = size + 'px';
+                ripple.style.left = x + 'px';
+                ripple.style.top = y + 'px';
+                ripple.style.position = 'absolute';
+                ripple.style.borderRadius = '50%';
+                ripple.style.background = 'rgba(255, 255, 255, 0.3)';
+                ripple.style.transform = 'scale(0)';
+                ripple.style.animation = 'ripple 0.6s linear';
+                ripple.style.pointerEvents = 'none';
+                
+                this.appendChild(ripple);
+                
+                setTimeout(() => {
+                    ripple.remove();
+                }, 600);
+            });
+        });
+
+        // Add CSS for ripple animation
+        const style = document.createElement('style');
+        style.textContent = `
+            @keyframes ripple {
+                to {
+                    transform: scale(2);
+                    opacity: 0;
+                }
+            }
+            .btn {
+                position: relative;
+                overflow: hidden;
+            }
+        `;
+        document.head.appendChild(style);
+
+        // Typing effect for hero subtitle
+        const subtitle = document.querySelector('.hero-subtitle');
+        const text = subtitle.textContent;
+        subtitle.textContent = '';
+        
+        let i = 0;
+        const typeWriter = () => {
+            if (i < text.length) {
+                subtitle.textContent += text.charAt(i);
+                i++;
+                setTimeout(typeWriter, 50);
+            }
+        };
+        
+        setTimeout(typeWriter, 2000);
+    </script>
 </body>
 </html>
